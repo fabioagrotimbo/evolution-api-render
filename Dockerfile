@@ -1,15 +1,17 @@
-FROM node:18-alpine
+FROM node:20-alpine
 
-RUN apk add --no-cache git python3 make g++
+RUN apk add --no-cache git python3 make g++ curl
 
 WORKDIR /app
 
-RUN git clone https://github.com/EvolutionAPI/evolution-api.git .
+RUN git clone --depth 1 --branch v2.1.1 https://github.com/EvolutionAPI/evolution-api.git .
 
-RUN npm install
+COPY .env.example .env
 
-RUN npm run build
+RUN npm install --legacy-peer-deps
 
 EXPOSE 8080
 
-CMD ["npm", "start"]
+ENV SERVER_PORT=8080
+
+CMD ["node", "dist/main.js"]
