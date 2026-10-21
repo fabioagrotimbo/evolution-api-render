@@ -1,12 +1,12 @@
-FROM node:16-alpine
+FROM node:20-alpine
 
 RUN apk add --no-cache git
 
 WORKDIR /app
 
-RUN git clone --depth 1 --branch 1.x https://github.com/EvolutionAPI/evolution-api.git .
+RUN git clone --depth 1 --branch main https://github.com/EvolutionAPI/evolution-api.git .
 
-RUN npm install
+RUN npm install --legacy-peer-deps
 
 EXPOSE 8080
 
