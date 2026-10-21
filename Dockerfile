@@ -1,15 +1,7 @@
-FROM node:20-alpine
+FROM wppconnect/wppconnect-server:latest
 
-RUN apk add --no-cache git
+EXPOSE 21465
 
-WORKDIR /app
+ENV PORT=21465
 
-RUN git clone --depth 1 --branch main https://github.com/EvolutionAPI/evolution-api.git .
-
-RUN npm install --legacy-peer-deps
-
-EXPOSE 8080
-
-ENV SERVER_PORT=8080
-
-CMD ["node", "src/main.js"]
+CMD ["node", "dist/server.js"]
