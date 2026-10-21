@@ -1,21 +1,15 @@
-FROM node:20-alpine
+FROM node:16-alpine
 
-RUN apk add --no-cache git python3 make g++ openssl
+RUN apk add --no-cache git
 
 WORKDIR /app
 
-RUN git clone --depth 1 https://github.com/EvolutionAPI/evolution-api.git .
+RUN git clone --depth 1 --branch 1.x https://github.com/EvolutionAPI/evolution-api.git .
 
-RUN cp .env.example .env
-
-RUN npm install --legacy-peer-deps
-
-RUN npx prisma generate
-
-RUN npm run build
+RUN npm install
 
 EXPOSE 8080
 
 ENV SERVER_PORT=8080
 
-CMD ["node", "dist/main.js"]
+CMD ["node", "src/main.js"]
