@@ -4,7 +4,7 @@ RUN apk add --no-cache git python3 make g++
 
 WORKDIR /app
 
-RUN git clone --depth 1 --branch v2.1.1 https://github.com/EvolutionAPI/evolution-api.git .
+RUN git clone --depth 1 https://github.com/EvolutionAPI/evolution-api.git .
 
 RUN cp .env.example .env
 
